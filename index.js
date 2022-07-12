@@ -15,9 +15,7 @@ function computerPlay() {
 //const result = computerPlay();
 //console.log(result);
 
-const choiceP = prompt("rock, paper, scissors?"); //String wird der variable playerSelection assigned
-const playerSelection = choiceP.toLowerCase();
-const computerSelection = computerPlay(); //computerPlay(); // result von der Funktion computerPlay() wird der variable computerSelection assigned
+//computerPlay(); // result von der Funktion computerPlay() wird der variable computerSelection assigned
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
@@ -37,10 +35,13 @@ console.log(winner); */
 
 function game() {
   for (let i = 0; i < 5; i++) {
+    const choiceP = prompt("rock, paper, scissors?"); //prompt Eingabe Feld -> speichert den String in choiceP.
+    const playerSelection = choiceP.toLowerCase(); //choiceP wird in Kleinbuchstaben umgewandelt und in playerSelection gespeichert
+    const computerSelection = computerPlay(); //Funktionsaufruf damit ein Spielzug vom Computer generiert wird -> wird in computerSelection gespeichert
     const winner = playRound(playerSelection, computerSelection); // Ruft die playRound Funktion mit den Resultaten (von playerselection und computerselection) auf und werden innerhalb der playRound Funktion gegenüber gestellt um zu schauen wer gewonnen hat.
     return winner;
   }
 }
 
-const whoWon = game();
-console.log(whoWon);
+const whoWon = game(); // Funktionsaufruf game(); und Resultat wird in Variable whoWon gespeichert.
+console.log(whoWon); //ausgabe von den Gewinnern

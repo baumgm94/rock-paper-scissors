@@ -3,6 +3,8 @@ const paperButton = document.querySelector("#paper");
 const scissorsButton = document.querySelector("#scissors");
 const result = document.querySelector("#result-container");
 
+let userName = prompt("Enter your name:", name);
+
 function computerPlay() {
   const array = ["rock", "paper", "scissors"];
   //get random index value
@@ -18,39 +20,33 @@ function computerPlay() {
 }
 
 function game(event) {
+  //Funktionsaufruf damit ein Spielzug vom Computer generiert wird -> wird in computerSelection gespeichert
   const playerSelection = event.target.id;
-  const computerSelection = computerPlay(); //Funktionsaufruf damit ein Spielzug vom Computer generiert wird -> wird in computerSelection gespeichert
+  const computerSelection = computerPlay();
   const xy = playRound(playerSelection, computerSelection); // Ruft die playRound Funktion mit den Resultaten (von playerselection und computerselection) auf und werden innerhalb der playRound Funktion gegenüber gestellt um zu schauen wer gewonnen hat.
-  const results = document.createElement("div");
-  results.classList.add("winner-div");
-  results.textContent = playerSelection + " vs. " + computerSelection;
-  result.appendChild(results);
   const winner = document.createElement("div");
   winner.classList.add("winner-div");
   winner.textContent = xy;
   result.appendChild(winner);
-  return xy;
 }
-
 rockButton.addEventListener("click", game);
 paperButton.addEventListener("click", game);
 scissorsButton.addEventListener("click", game);
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    return "Tie";
+    return "it's a tie!";
   } else if (
-    (playerSelection === "Rock" && computerSelection === "Scissors") ||
-    (playerSelection === "Paper" && computerSelection === "Rock") ||
-    (playerSelection === "Scissors" && computerSelection === "Paper")
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-    return "Player";
+    return (
+      userName + "(" + playerSelection + " beats " + computerSelection + ")"
+    );
   } else {
-    return "Computer";
+    return (
+      "Computer " + "(" + computerSelection + " beats " + playerSelection + ")"
+    );
   }
 }
-
-/*function displayWinner(winner) {
-  const gewinner = game();
-  return "Hallo";
-}*/

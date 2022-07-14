@@ -1,3 +1,8 @@
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const result = document.querySelector("#result-container");
+
 function computerPlay() {
   const array = ["rock", "paper", "scissors"];
   //get random index value
@@ -11,37 +16,41 @@ function computerPlay() {
 
   return item;
 }
-//Funktionsaufruf und das random item wird in result gespeichert
-//const result = computerPlay();
-//console.log(result);
 
-//computerPlay(); // result von der Funktion computerPlay() wird der variable computerSelection assigned
+function game(event) {
+  const playerSelection = event.target.id;
+  const computerSelection = computerPlay(); //Funktionsaufruf damit ein Spielzug vom Computer generiert wird -> wird in computerSelection gespeichert
+  const xy = playRound(playerSelection, computerSelection); // Ruft die playRound Funktion mit den Resultaten (von playerselection und computerselection) auf und werden innerhalb der playRound Funktion gegenüber gestellt um zu schauen wer gewonnen hat.
+  const results = document.createElement("div");
+  results.classList.add("winner-div");
+  results.textContent = playerSelection + " vs. " + computerSelection;
+  result.appendChild(results);
+  const winner = document.createElement("div");
+  winner.classList.add("winner-div");
+  winner.textContent = xy;
+  result.appendChild(winner);
+  return xy;
+}
+
+rockButton.addEventListener("click", game);
+paperButton.addEventListener("click", game);
+scissorsButton.addEventListener("click", game);
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     return "Tie";
   } else if (
-    (playerSelection === "rock" && computerSelection === "scissors") ||
-    (playerSelection === "paper" && computerSelection === "rock") ||
-    (playerSelection === "scissors" && computerSelection === "paper")
+    (playerSelection === "Rock" && computerSelection === "Scissors") ||
+    (playerSelection === "Paper" && computerSelection === "Rock") ||
+    (playerSelection === "Scissors" && computerSelection === "Paper")
   ) {
     return "Player";
   } else {
     return "Computer";
   }
 }
-/*onst winner = playRound(playerSelection, computerSelection); // Ruft die playRound Funktion mit den Resultaten (von playerselection und computerselection) auf und werden innerhalb der playRound Funktion gegenüber gestellt um zu schauen wer gewonnen hat.
-console.log(winner); */
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    const choiceP = prompt("rock, paper, scissors?"); //prompt Eingabe Feld -> speichert den String in choiceP.
-    const playerSelection = choiceP.toLowerCase(); //choiceP wird in Kleinbuchstaben umgewandelt und in playerSelection gespeichert
-    const computerSelection = computerPlay(); //Funktionsaufruf damit ein Spielzug vom Computer generiert wird -> wird in computerSelection gespeichert
-    const winner = playRound(playerSelection, computerSelection); // Ruft die playRound Funktion mit den Resultaten (von playerselection und computerselection) auf und werden innerhalb der playRound Funktion gegenüber gestellt um zu schauen wer gewonnen hat.
-    return winner;
-  }
-}
-
-const whoWon = game(); // Funktionsaufruf game(); und Resultat wird in Variable whoWon gespeichert.
-console.log(whoWon); //ausgabe von den Gewinnern
+/*function displayWinner(winner) {
+  const gewinner = game();
+  return "Hallo";
+}*/

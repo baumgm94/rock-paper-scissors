@@ -12,10 +12,8 @@ function computerPlay() {
   //also Math.random z.B. 0.43 * länge vom Array (3) = 1.29 --> Math.floor returns the rounded float --> 1
   // so wird der randomIndex generiert
   const randomIndex = Math.floor(Math.random() * array.length);
-
   // get random item out of the array
   const item = array[randomIndex];
-
   return item;
 }
 
